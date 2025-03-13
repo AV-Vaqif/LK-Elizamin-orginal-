@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    border-radius: 20px;
+    background-color: #ecf7ee;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #c9c9c9;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: poppins;
+}
+
+/* *================== nav bar=================== */
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px;
+    max-width: 1120px;
+    width: 100%;
+    margin: auto;
+}
+
+.menu {
+    display: flex;
+
+}
+
+.menu li a {
+    padding: 3px 10px;
+    margin: 0px 15px;
+    color: #3b3b3b;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #637E40;
+}
+
+.logo span {
+    color: #E2BF14;
+}
+
+.right-nav {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 25px;
+}
+
+.right-nav a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: relative;
+}
+
+.right-nav .like {
+    background-color: #fff0ee;
+    color: #ff6c57;
+}
+
+.right-nav .cart {
+    background-color: #ecf7ee;
+    color: #4eb060;
+}
+
+.right-nav .profile {
+    background-color: #F5F5F5;
+    color: #616161;
+    font-size: 22px;
+}
+
+.right-nav a span {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 500;
+}
+
+.right-nav .like span {
+    background-color: #ff6c57;
+}
+
+.right-nav .cart span {
+    background-color: #4eb060;
+}
+
+.menu li a:hover,
+.menu .active {
+    color: #40aa54;
+    transition: all ease 0.3s;
+
+}
+
+
+/* * =============== FOOTER ======================= */
+
+footer {
+    background-color: #1b1d1f;
+    padding: 50px 20px;
+    border-top: 5px solid #4eb060;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.footer-logo a {
+    color: #637E40;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.footer-logo a span {
+    color: #E2BF14;
+}
+
+.footer-social {
+    display: flex;
+    margin-top: 10px;
+}
+
+.footer-social a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 1px solid #ffffff15;
+    font-size: 1rem;
+    margin: 0px 5px;
+    transition: all ease 0.3s;
+}
+
+.footer-social a:hover {
+    background-color: #4eb060;
+}
+
+.footer-links strong {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.footer-links ul {
+    margin-top: 10px;
+}
+
+.footer-links ul li a {
+    color: white;
+    opacity: 0.5;
+    margin: 4px 0px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all ease 0.3s;
+}
+
+.footer-links ul li a:hover {
+    opacity: 1;
+}
+
+/* * =============== Responsivlik =================== */
+
+.menu-icon,
+.menu-btn {
+    display: none;
+}
+
+@media (max-width: 986px) {
+    .navigation {
+        justify-content: space-between;
+        height: 65px;
+        padding: 35px 25px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .product-container {
+        gap: 20px;
+    }
+
+    .navigation .menu {
+        height: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 65px;
+        left: 0px;
+        transition: all 0.5s ease;
+        z-index: 100;
+        background-color: white;
+        width: 100%;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+        border-bottom: 1px solid rgba(245, 245, 245);
+    }
+
+    .navigation .menu li {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .navigation .menu li a {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 30px 20px;
+        margin: 0px;
+        border: 1px solid rgba(248, 247, 247, 0.5);
+    }
+
+    .menu-icon {
+        display: block;
+    }
+    
+    .navigation .menu-icon{
+        cursor: pointer;
+        float: right;
+        padding: 5px;
+        position: relative;
+        user-select: none;
+        z-index: 2;
+    }
+    .navigation .menu-icon .nav-icon{
+        background-color: #141414cc;
+        display: block;
+        height: 2px;
+        width: 25px;
+        position: relative;
+        transition: background 0.2s ease-out;
+    }
+    .navigation .menu-icon .nav-icon::before,
+    .navigation .menu-icon .nav-icon::after{
+        background-color: #141414cc;
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transition: all ease-out 0.2s;
+    }
+    .navigation .menu-icon .nav-icon::before{
+        top: 7px;
+    }
+    .navigation .menu-icon .nav-icon::after{
+        top: -7px;
+    }
+    .navigation .menu-btn:checked ~ .menu-icon .nav-icon::before{
+        transform: rotate(-45deg);
+        top: 0px;
+    }
+    .navigation .menu-btn:checked ~ .menu-icon .nav-icon::after{
+        transform: rotate(45deg);
+        top: 0px;
+    }
+    .navigation .menu-btn:checked ~ .menu-icon .nav-icon{
+        background: transparent;
+    }
+    .navigation .menu-btn:checked ~ .menu{
+        display: block;
+    }
+
+    .footer-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .footer-logo{
+        align-items: flex-start;
+    }
+    .footer-links{
+        text-align: start;
+        margin: 20px;
+    }
+
+}
+
+@media (max-width: 505px){
+    .right-nav {
+        gap: 20px;
+    }
+    .right-nav a {
+        width: 25px;
+        height: 25px;
+    }
+    .right-nav a span {
+        position: absolute;
+        top: -5px;
+        right: -7px;
+        width: 10px;
+        height: 10px;
+        font-size: 0.4rem;
+        font-weight: 500;
+    }
+
+    .footer-container{
+        grid-template-columns: 1fr;
+    }
+    
+}
+@media (max-width: 350px) {
+    .logo {
+        font-size: 1rem;
+    }
+}

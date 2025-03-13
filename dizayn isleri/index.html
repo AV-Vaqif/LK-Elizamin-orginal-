@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#FFFFFFF2" id="themeColor">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./css/index.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-messaging.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="n6o-referrer" />
+    <title>LankonFarm Store</title>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/11.1.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/11.1.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-performance-compat.js"></script>
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <!-- Firebase Database SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+   
+</head>
+
+<body id="body">
+    <!--! ========== NAV BAR =====================  -->
+
+    <nav class="navigation">
+
+
+        <a href="#" class="logo" style="outline: none; border: none; font-size: 18px;">Lankon<span>Farm</span></a>
+
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon">
+            <span class="nav-icon"></span>
+        </label>
+
+
+        <ul class="menu">
+            <li><a href="index.html" class="active" id="main_page" data-i18n="Ana səhifə">Ana səhifə</a></li>
+            <li><a id="product_clikc" data-i18n="Məhsullar">Məhsullar</a></li>
+            <li><a href="#" id="partniyor" data-i18n="Partnyorlar">Partnyorlar</a></li>
+            <li><a href="#" id="sdy" data-i18n="SDY-xidməti">SDY-xidməti</a></li>
+
+        </ul>
+
+        <div class="right-nav">
+            <a href="beyenilen.html" class="like"><i class="fa-regular fa-heart"></i><span id="like-count">0</span></a>
+            <a href="sebet.html" class="cart"><i class="fa-solid fa-cart-shopping"></i><span
+                    id="cart-count">0</span></a>
+            <a id="alinks" class="profile">
+                <div id="profile-icon" class="profile-container">
+                    <i class="fa-regular fa-circle-user"></i>
+                </div>
+            </a>
+
+
+
+        </div>
+
+    </nav>
+
+    <script type="module" src="javascript/database.js"></script>
+
+    <!--! ========== BANNER =====================  -->
+    <section id="search-banner">
+
+        <img src="images/bg-1.png" class="bg-1" alt="">
+        <img src="images/bg-2.png" class="bg-2" alt="">
+
+        <div class="search-banner-text">
+            <h1>Sizdə <span style="color: #4eb060;">təbii</span> məhsullar əldə etmək istəyirsiniz?</h1>
+            <strong id="hastagh">#Keyfiyyət öncəliyimizdir</strong>
+
+            <form action="#" class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="search" name="search" class="search-input" data-i18n="Məhsul axtarışı..."
+                    placeholder="Məhsul axtarışı..." required>
+                <input type="submit" class="search-btn" value="Axtar">
+            </form>
+        </div>
+    </section>
+    <!--! ========== BANNER son =====================  -->
+
+
+
+
+
+    <!--! ========== Kateqoriyalar =====================  -->
+
+    <section id="category">
+
+        <div class="category-heading">
+            <h2 id="kategory" data-i18n="Kateqoriyalar">Kateqoriyalar</h2>
+            <a href="#" data-i18n="Hamısı">Hamısı <i class="fa-solid fa-chevron-right fa-2xs"></i></a>
+        </div>
+
+        <div class="category-container">
+            <a href="product.html?category=Süd məhsulları" class="category-box">
+                <img width="35" height="35"
+                    src="https://img.icons8.com/external-jumpicon-line-ayub-irawan/35/external-Dairy-Products-supermarket-jumpicon-(line)-jumpicon-line-ayub-irawan.png"
+                    alt="external-Dairy-Products-supermarket-jumpicon-(line)-jumpicon-line-ayub-irawan" />
+                <span id="sud" data-i18n="Süd məhsulları">Süd məhsulları</span>
+            </a>
+            <a href="product.html?category=Meyvələr" class="category-box">
+                <img width="40" height="40"
+                    src="https://img.icons8.com/external-wanicon-lineal-wanicon/40/external-fruits-and-vegetables-supermarket-wanicon-lineal-wanicon.png"
+                    alt="external-fruits-and-vegetables-supermarket-wanicon-lineal-wanicon" />
+                <span id="meyve" data-i18n="Meyvələr">Meyvələr</span>
+            </a>
+            <a href="product.html?category=Pambıq" class="category-box">
+                <img width="40" height="40" src="https://img.icons8.com/ios/40/cotton.png" alt="cotton" />
+                <span id="pambiq" data-i18n="Pambıq">Pambıq</span>
+            </a>
+            <a href="product.html?category=İçkilər" class="category-box">
+                <img width="40" height="40" src="https://img.icons8.com/pulsar-line/40/the-toast.png" alt="the-toast" />
+                <span id="icki" data-i18n="İçkilər">İçkilər</span>
+            </a>
+            <a href="product.html?category=Ət Məhsulları" class="category-box">
+                <img width="44" height="44" src="https://cdn-icons-png.flaticon.com/512/2537/2537216.png" />
+                <span class="word-1" id="et" data-i18n="Ət">Ət</span>
+                <span class="word-2" id="etm"></span>
+            </a>
+
+            <a href="product.html?category=Arıçılıq" class="category-box">
+                <img width="40" height="40"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoDMz3a9C3o1C1yrzMvn1FENfNXI_cVyt2JTKiLZ_ekz202sJmlsNI1eVwOBPEhzRnLjE&usqp=CAU"
+                    alt="chicken" />
+                <span class="word-1" id="ari" data-i18n="Arıçılıq">Arıçılıq</span>
+                <span class="word-2" id="arim"></span>
+            </a>
+        </div>
+    </section>
+    <!--! ========== Kateqoriyalar son =====================  -->
+
+
+
+
+    <!--! ========== Region mehsullari =====================  -->
+    <section id="region-product">
+
+        <div class="product-heading">
+            <h2 id="regionozel" data-i18n="Regiona Özəl Məhsullar:">Regiona Özəl Məhsullar:</h2>
+            <h2 id="religion-name" data-i18n="Lənkəran">Lənkəran</h2>
+        </div>
+
+        <div id="products-container" class="product-container">
+            <!-- * =============== mehsul 1 ===================== -->
+
+
+
+        </div>
+    </section>
+    <!--! ========== Region mehsullari son =====================  -->
+
+
+
+    <!--! ========== Endirimli mehsullar =====================  -->
+    <section id="endrimli-product">
+
+        <div class="product-heading">
+            <h3 id="endirimlitxt" data-i18n="Endirimli Məhsullar">Endirimli Məhsullar</h3>
+        </div>
+
+        <div class="product-container" id="products-container">
+            <!-- * ================ mehsul 1 ===================== -->
+
+
+
+        </div>
+
+    </section>
+    <!--! ========== Endirimli mehsullar son =====================  -->
+
+
+
+
+    <!--! ========== Fermer reyleri =====================  -->
+    <section id="clients">
+
+        <div class="client-heading">
+            <h3 id="fermers_deyir" data-i18n="Fermerlərimiz nə deyir?">Fermerlərimiz nə deyir?</h3>
+        </div>
+
+        <div class="client-box-container">
+            <!-- *================= fermer 1 =====================-->
+            <div class="client-box">
+                <div class="client-profile">
+                    <img src="images/Profile-av.jpg" alt="">
+                    <div class="profile-text">
+                        <strong>Akif Məmmədov</strong>
+                        <span>Masallı Fermer</span>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>Mən təzə kənd məhsulları ilə sizə xidmət edirəm! Pomidor, xiyar, təbii bal, təzə yumurta – hər şey
+                    100% təbiidir. Müştərilərim deyir ki, mənim məhsullarım süni dadlardan uzaqdır. Sifariş edin və bu
+                    dadı siz də yaşayın! Unutmayın, hər məhsul öz əlimlə seçilib!</p>
+            </div>
+            <!-- *================= fermer 2 =====================-->
+            <div class="client-box">
+                <div class="client-profile">
+                    <img src="images/baby.png" alt="">
+                    <div class="profile-text">
+                        <strong>Əlizamin Əliyev</strong>
+                        <span>Cəlilabad Fermer</span>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>Mən 20 ildir kənd təsərrüfatı ilə məşğulam. Hər gün zəhmətlə yetişdirdiyim təzə tərəvəzləri,
+                    meyvələri və süd məhsullarını indi birbaşa sizə çatdırıram. Artıq bazara getməyə ehtiyac yoxdur,
+                    məhsullarımın keyfiyyətinə və təzəliyinə tam əmin ola bilərsiniz. Online sifariş edin, biz evinizə
+                    qədər çatdıraq. Təbiətin dadını hiss etmək istəyirsinizsə, məhsullarımızı sınayın!</p>
+            </div>
+            <!-- *================= fermer 3 =====================-->
+            <div class="client-box">
+                <div class="client-profile">
+                    <img src="images/Profile-sz.png" alt="">
+                    <div class="profile-text">
+                        <strong>Suzanna Əlizadə</strong>
+                        <span>Lənkəran Fermer</span>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>Təbiətə və təbii qidaya dəyər verirsiniz? Mən də elə sizin kimi düşünürəm! Ona görə də kənddən
+                    birbaşa süfrənizə gələn məhsulları təklif edirəm. Həm yerli fermerləri dəstəkləyin, həm də təzə və
+                    dadlı məhsullarla qidalanın. Sifariş verin və sağlamlığınızı qoruyun!</p>
+            </div>
+        </div>
+
+    </section>
+    <!--! ========== Fermer reyleri son =====================  -->
+
+
+
+
+    <!-- !============== Partnyorlar ================= -->
+    <section id="partner">
+
+        <div class="partner-heading">
+            <h3 id="partniyor" data-i18n="Partnyorlar">Partnyorlar</h3>
+        </div>
+
+        <div class="logo-container">
+            <img src="images/logo-1.png" alt="">
+            <img src="images/logo-2.png" alt="">
+            <img src="images/logo-3.png" alt="">
+            <img src="images/KTN.png" alt="">
+        </div>
+    </section>
+    <!-- !============== Partnyorlar son ================= -->
+
+
+
+    <!-- !============== Mobil Tetbiq reklami ================== -->
+    <section id="download-app">
+
+        <div class="app-img">
+            <img src="images/mobile-app.png" alt="">
+        </div>
+
+        <div class="download-app-text">
+            <strong data-i18n="Mobil tətbiq">Mobil tətbiq</strong>
+            <p
+                data-i18n="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia deleniti et, harum quo recusandae, quas nostrum natus dolores cumque dolor magnam officiis voluptatem, autem explicabo! Quam soluta repudiandae numquam nostrum?">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia deleniti et, harum quo recusandae, quas
+                nostrum natus dolores cumque dolor magnam officiis voluptatem, autem explicabo! Quam soluta repudiandae
+                numquam nostrum?</p>
+            <div class="download-btns">
+                <a href="#"><img src="images/appstore-btn.png" alt=""></a>
+                <a href="#"><img src="images/googleplay-btn.png" alt=""></a>
+            </div>
+        </div>
+
+    </section>
+    <!-- !============== Mobil Tetbiq reklami son ================== -->
+
+
+
+    <!-- !============== Footer ================== -->
+    <footer>
+        <div class="footer-container">
+
+            <!-- * ============== logo ve sosial sebekeler ===========-->
+            <div class="footer-logo">
+                <a href="#" style="outline: none; border: none;">Lankon<span>Farm</span></a>
+
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <!-- * ============== kecidler 1================= -->
+            <div class="footer-links">
+                <strong id="kategory" data-i18n="Kateqoriyalar">Kateqoriyalar</strong>
+                <ul>
+                    <li><a href="#" id="sud" data-i18n="Süd məhsulları">Süd məhsulları</a></li>
+                    <li><a href="#" id="meyve" data-i18n="Meyvələr">Meyvələr</a></li>
+                    <li><a href="#" id="terevez" data-i18n="Tərəvəzlər">Tərəvəzlər</a></li>
+                    <li><a href="#" id="diger" data-i18n="Digər məhsullar">Digər məhsullar</a></li>
+                </ul>
+            </div>
+            <!-- * ============== kecidler 2================= -->
+            <div class="footer-links">
+                <strong id="company" data-i18n="Şirkət">Şirkət</strong>
+                <ul>
+                    <li><a href="https://lankonfarm.com/about-us.html" data-i18n="Haqqımızda">Haqqımızda</a></li>
+                    <li><a href="#" id="partniyor" data-i18n="Partnyorlar">Partnyorlar</a></li>
+                    <li><a href="#" id="sdy" data-i18n="SDY-xidməti">SDY-xidməti</a></li>
+                </ul>
+            </div>
+            <!-- * ============== kecidler 3================= -->
+            <div class="footer-links">
+                <strong id="contact" data-i18n="Əlaqə">Əlaqə</strong>
+                <ul>
+                    <li><a href="#" id="phone" data-i18n="Telefon: (+994) 055-888-99-88">Telefon: (+994)
+                            055-888-99-88</a></li>
+                    <li><a href="#" id="adress" data-i18n="Ünvan: Lənkəran">Ünvan: Lənkəran</a></li>
+                    <li><a href="#" id="email" data-i18n="Email: LankonFarm@gmail.com">Email: LankonFarm@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="javascript/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/product-details.css">
+    <!--! ========== FONT AWESOME =====================  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>LankonFarm Store</title>
+
+    <script defer src="/__/firebase/11.1.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/11.1.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style>
+         .modal {
+      display: none; /* Başlangıçta gizli */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .confirm-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .cancel-btn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+         iframe {
+    width: 100%;
+    height: 100vh;
+    border: none;
+    
+  }
+        .order-button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.order-button:hover {
+    background-color: #45a049;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+.order-button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: scale(0.97);
+}
+
+@media (max-width: 768px) {
+    .order-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
+        .loading-screen {
+    text-align: center;
+  }
+  .total-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f5f5f5; 
+    padding: 10px 20px;       
+    border-radius: 10px;     
+    width: 200px; 
+    font-weight: bold;        
+    font-size: 12px;         
+    text-transform: uppercase; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.total-price h4 {
+    margin: 0;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    color: #333;              
+}
+
+.total-price #total-price {
+    font-size: 18px;          
+    color: #d9534f;           
+}
+
+  .loading-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+  }
+  
+  .circle {
+  width: 100%;
+  height: 100%;
+  border: 6px  rgba(255, 254, 254);
+  border-top: 6px solid #71ff25; 
+  border-right: 6px solid #00ff37; 
+  border-radius: 50%;
+  animation: advanced-spin 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+  box-shadow: 0 0 15px #00ff26, 0 0 25px #cfffa3;
+}
+.checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        input[type="checkbox"] {
+            display: none;
+        }
+        .custom-checkbox {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border: 2px solid #4eb060;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .custom-checkbox:after {
+            content: '';
+            position: absolute;
+            width: 19px;
+            height: 19px;
+            background-color: #4eb060;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s;
+            border-radius: 3px;
+        }
+        input[type="checkbox"]:checked + .custom-checkbox:after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        input[type="checkbox"]:checked + .custom-checkbox {
+            background-color: #e7f3ff;
+        }
+        label {
+            margin-left: 10px;
+            font-size: 16px;
+        }
+.circle:before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top: 3px solid rgba(87, 255, 72, 0.5);
+  animation: spin 3s linear infinite;
+}
+  
+@keyframes advanced-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    box-shadow: 0 0 15px #59ff00, 0 0 25px #00ffff;
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 0 20px #59ff00, 0 0 35px #00ffff;
+  }
+  50% {
+    transform: rotate(180deg) scale(0.9); 
+    box-shadow: 0 0 10px #59ff00, 0 0 20px #00ffff;
+  }
+  75% {
+    transform: rotate(270deg) scale(1.2); 
+    box-shadow: 0 0 30px #59ff00, 0 0 40px #00ffff;
+  }
+  100% {
+    transform: rotate(360deg) scale(1); 
+    box-shadow: 0 0 15px #59ff00, 0 0 25px #00ffff;
+  }
+}
+
+/* Nabız animasyonu */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+}
+  
+  .progress-container {
+    width: 300px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    margin: 20px auto;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #fff;
+    border-radius: 5px 0 0 5px;
+    transition: width 0.2s ease-in-out;
+  }
+  
+        .profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+    border-radius: 50%; 
+    overflow: hidden; 
+    display: block; 
+    margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .profile-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+        @media (max-width: 768px) {
+    .part-2, .part-3 {
+        margin: 5px;
+        padding: 8px;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    label {
+        font-size: 1em;
+    }
+
+    input[type="checkbox"] {
+        transform: scale(1.2); 
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    strong {
+        font-size: 1em;
+    }
+
+    input[type="checkbox"] {
+        transform: scale(1.5); 
+    }
+
+    .part-2, .part-3 {
+        padding: 5px;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <!--! ========== NAV BAR =====================  -->
+    <script type="module" src="javascript/like.js"></script>
+    <nav class="navigation">
+
+        <a href="#" class="logo" style="outline: none; border: none;">Lankon<span>Farm</span></a>
+
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon">
+            <span class="nav-icon"></span>
+        </label>
+
+        <div id="confirmModal" class="modal">
+            <div class="modal-content">
+              <h3>Almaq İstədiyinizden əminsiniz?</h3>
+              <p>Bu əməliyyat geri almaq olmur!</p>
+              <div class="size">
+                <h3>Ödəmə Üsulu</h3>
+                <div class="checkbox-container" style="border: #333; border-radius: 5px;">
+                    <input type="checkbox" id="creative-checkbox" class="odenis" value="kartla">
+                    <label for="creative-checkbox" class="custom-checkbox"></label>
+                    <label for="creative-checkbox">kartla</label>
+                    
+                </div>
+                <div class="checkbox-container" style="border: #333; border-radius: 5px;">
+                    <input type="checkbox" id="checkbox" class="odenis" value="Yerində Ödəniş">
+                    <label for="checkbox" class="custom-checkbox"></label>
+                    <label for="checkbox" >Yerində Ödəniş</label>
+                </div>
+                
+            </div>
+              <button id="confirmBtn" class="confirm-btn">Bəli</button>
+              <button id="cancelBtn" class="cancel-btn">Xeyr</button>
+            </div>
+          </div>
+        <ul class="menu">
+            <li><a href="index.html">Ana səhifə</a></li>
+            <li><a href="product.html" class="active">Məhsullar</a></li>
+            <li><a href="#">Partnyorlar</a></li>
+            <li><a href="#">SDY-xidməti</a></li>
+        </ul>
+
+        <div class="right-nav">
+            <a href="beyenilen.html" class="like"><i class="fa-regular fa-heart"></i><span id="like-count">0</span></a>
+            <a href="sebet.html" class="cart"><i class="fa-solid fa-cart-shopping"></i><span id="cart-count">0</span></a>
+            <a id="alinks" class="profile"><div id="profile-icon" class="profile-container">
+                <i class="fa-regular fa-circle-user"></i>
+              </div>
+            </a>
+        </div>
+    </nav>
+    <div style="display: flex; align-items: center; justify-content: center; margin: 0;text-transform: uppercase;">
+        <div class="total-price">
+            <p style="text-transform: uppercase;">Ümumi qiymət:</p>
+            <span id="total-price">0</span>
+        </div>
+    </div>
+    <section id="endrimli-product">
+
+        <div style="text-align: center; font: 1em sans-serif; font-family: 'Courier New', Courier, monospace; font-size: larger; color: rgb(177, 205, 50);">
+            <h3 style="margin: 0;"><i style="color: black; font-style: normal;">Beyənənlən</i> məhsullar</h3>
+            <i class="fa-solid fa-heart" style="width: 60px; height: 5px; color: black;"></i>
+        </div>
+        
+
+        <div class="product-container" id="product-container">
+            <div class="loading-screen" id="progress1" style="visibility: hidden;">
+                <div class="loading-circle">
+                  <div class="circle"></div>
+                </div>
+              </div>
+              <div class="loading-screen" id="progress2">
+                <div class="loading-circle">
+                  <div class="circle"><img src="images/lankonfarm.gif" style="width: 80px; height: 80px;" alt=""></div>
+                </div>
+              </div>
+            
+                
+            
+        </div>
+
+        
+
+    </section>
+ 
+    <div style="display: none; align-items: center; justify-content: center; margin: 0;text-transform: uppercase;">
+        <Button id="alhamisini-sifarish" class="order-button">Hamısını Sifariş et</Button>
+    </div>
+    <div style="height: 40px;"> </div>
+    
+    <!-- !============== Məhsullar =========================== -->
+
+         
+    
+     <!-- !============== Footer ================== -->
+    <footer>
+        <div class="footer-container">
+
+            <!-- * ============== logo ve sosial sebekeler ===========-->
+            <div class="footer-logo">
+                <a href="#" style="outline: none; border: none;">Lankon<span>Farm</span></a>
+
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <!-- * ============== kecidler 1================= -->
+            <div class="footer-links">
+                <strong>Kateqoriyalar</strong>
+                <ul>
+                    <li><a href="#">Süd məhsulları</a></li>
+                    <li><a href="#">Meyvələr</a></li>
+                    <li><a href="#">Tərəvəzlər</a></li>
+                    <li><a href="#">Digər məhsullar</a></li>
+                </ul>
+            </div>
+            <!-- * ============== kecidler 2================= -->
+            <div class="footer-links">
+                <strong>Şirkət</strong>
+                <ul>
+                    <li><a href="https://lankonfarm.com/about-us.html">Haqqımızda</a></li>
+                    <li><a href="#">Partnyorlar</a></li>
+                    <li><a href="#">SDY-xidməti</a></li>
+                </ul>
+            </div>
+            <!-- * ============== kecidler 3================= -->
+            <div class="footer-links">
+                <strong>Əlaqə</strong>
+                <ul>
+                    <li><a href="#">Telefon: (+994) 055-888-99-88</a></li>
+                    <li><a href="#">Ünvan: Lənkəran</a></li>
+                    <li><a href="#">Email: LankonFarm@gmail.com</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </footer>
+     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+     <script>
+        AOS.init();
+      </script>
+     <script src="javascript/index.js"></script>
+</body>
+
+</html>

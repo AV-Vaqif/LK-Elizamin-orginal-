@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/product.css">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!--! ========== FONT AWESOME =====================  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>LankonFarm Store</title>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/11.1.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/11.1.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style>
+        .profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  .profile-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+        @media (max-width: 768px) {
+    .part-2, .part-3 {
+        margin: 5px;
+        padding: 8px;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    label {
+        font-size: 1em;
+    }
+
+    input[type="checkbox"] {
+        transform: scale(1.2); /* Checkbox'ları büyüt */
+    }
+}
+
+/* Daha Küçük Ekranlar için (Telefonlar) */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    strong {
+        font-size: 1em;
+    }
+
+    input[type="checkbox"] {
+        transform: scale(1.5); /* Daha belirgin checkbox */
+    }
+
+    .part-2, .part-3 {
+        padding: 5px;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <!--! ========== NAV BAR =====================  -->
+    <nav class="navigation">
+
+        <a href="#" class="logo" style="outline: none; border: none;">Lankon<span>Farm</span></a>
+
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon">
+            <span class="nav-icon"></span>
+        </label>
+
+
+        <ul class="menu">
+            <li><a href="index.html">Ana səhifə</a></li>
+            <li><a href="product.html" class="active">Məhsullar</a></li>
+            <li><a href="#">Partnyorlar</a></li>
+            <li><a href="#">SDY-xidməti</a></li>
+        </ul>
+
+        <div class="right-nav">
+            <a href="beyenilen.html" class="like"><i class="fa-regular fa-heart"></i><span id="like-count">0</span></a>
+            <a href="sebet.html" class="cart"><i class="fa-solid fa-cart-shopping"></i><span id="cart-count">0</span></a>
+            <a id="alinks" class="profile"><div id="profile-icon" class="profile-container">
+                <i class="fa-regular fa-circle-user"></i>
+              </div>
+            </a>
+        </div>
+    </nav>
+    
+    <form action="#" class="siralama-sm">
+        <span>Sıralama: </span>
+        <select name="" id="">
+            <option value="">Ada görə</option>
+            <option value="">Yenilər əvvəlcə</option>
+            <option value="">Populyar məhsullar əvvəlcə</option>
+            <option value="">Populyar məhsullar sonda</option>
+            <option value="">Əvvəlcə ucuz</option>
+            <option value="">Əvvəlcə baha</option>
+        </select>
+        <img id="button" style="margin-left: 22px;" width="30" height="30" src="https://img.icons8.com/ios/30/sorting-options--v1.png"
+        alt="sorting-options--v1" />
+    </form>
+    <script>
+        window.onload = function() {
+            var button = document.getElementById("button");
+
+
+  
+            button.onclick = function() {
+                const productsLeft = document.querySelector(".products-left");
+                        if (productsLeft.style.display === "none" || productsLeft.style.display === "") {
+                        productsLeft.style.display = "block"; // Göster
+                        } else {
+                        productsLeft.style.display = "none"; // Gizle
+                        }
+                };
+            }
+    </script>
+    
+    <!-- !============== Məhsullar =========================== -->
+    <section id="products" class="products">
+
+        <!-- todo =============== Məhsullar sol ===================== -->
+        <form action="#" class="products-left">
+
+            <div class="part-1">
+                <strong>Filter</strong>
+                <img width="30" height="30" src="https://img.icons8.com/ios/30/sorting-options--v1.png"
+                    alt="sorting-options--v1" />
+            </div>
+        
+            <script type="module" src="javascript/productdb.js"></script>
+            <div class="part-2">
+                <strong>Kategoriya</strong>
+                <div>
+                    <p><input class="checkbox" id="checkbox1" type="checkbox"> Süd Məhsulları</p>
+                    <p><input class="checkbox" id="checkbox2" type="checkbox"> Meyvələr</p>
+                    <p><input class="checkbox" id="checkbox3" type="checkbox"> Tərəvəzlər</p>
+                    <p><input class="checkbox" id="checkbox4" type="checkbox"> Ət Məhsulları</p>
+                    <p><input class="checkbox" id="checkbox5" type="checkbox"> Gilə Meyvələr</p>
+                    <p><input class="checkbox" id="checkbox6" type="checkbox"> İçkilər</p>
+                    <p><input class="checkbox" id="checkbox7" type="checkbox"> Pambıq</p>
+                    <p><input class="checkbox" id="checkbox8" type="checkbox"> İpək</p>
+                    <p><input class="checkbox" id="checkbox9" type="checkbox"> Arıçılıq</p>
+                    <p><input class="checkbox" id="checkbox10" type="checkbox"> Çərəzlər</p>
+
+
+                </div>
+            </div>
+            <div class="part-3" id="cts" style="display: none;">
+                <strong>Alt-kategoriya</strong>
+                <div id="altkategoriya">
+                    
+                
+
+                </div>
+            </div>
+
+            <div class="part-3">
+                <strong>Regionlar</strong>
+                <div>
+                    <p><input type="checkbox" class="checkbox"><label> Bütün Şəhərlər</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Bakı</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Gəncə</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Sumqayıt</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Şəki</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Mingəçevir</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Naftalan</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Lənkəran</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Şirvan</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Yevlax</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Xankəndi</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Naxçıvan</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Abşeron</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Ağcabədi</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Ağdam</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Ağdaş</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Ağstafa</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Ağsu</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Astara</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Babək</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Balakən</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Bərdə</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Beyləqan</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Biləsuvar</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Cəbrayıl</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Cəlilabad</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Daşkəsən</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Füzuli</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Gədəbəy</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Goranboy</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Göyçay</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Göygöl</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Hacıqabul</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Xaçmaz</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Xızı</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Xocalı</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Xocavənd</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> İmişli</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> İsmayıllı</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Kəlbəcər</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Kəngərli</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Kürdəmir</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Qəbələ</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Qax</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Qazax</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Qobustan</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Quba</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Qubadlı</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Qusar</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Laçın</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Lerik</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Masallı</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Neftçala</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Oğuz</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Ordubad</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Saatlı</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Sabirabad</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Sədərək</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Salyan</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Samux</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Siyəzən</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Şabran</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Şamaxı</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Şəmkir</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Şuşa</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Tərtər</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Tovuz</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Ucar</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Yardımlı</label></p>
+                    <p><input type="checkbox" class="checkbox"><label> Yevlax (rayon)</label></p>
+                    <p><input type="checkbox" class="checkbox"><label>Zağatala</label></p>
+                    <p><input type="checkbox" class="checkbox"><label>Zəngilan</label></p>
+                    <p><input type="checkbox" class="checkbox"><label>Zərdab</label></p>
+
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <div style="height: 5px;"></div>
+                <button id="islet" style="width: 100%;background-color: #4CAF50; color: white; border: none; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 12px; transition: background-color 0.3s;">
+                    Təsdiq et
+                </button>
+            </div>
+            
+            <style>
+                #islet:hover {
+                    background-color: #45a049;
+                }
+            </style>
+            
+
+        </form>
+
+        <!-- todo =============== Məhsullar sağ ===================== -->
+
+        
+        
+        <div id="products-container" class="products-container">
+
+            <!-- ! ============= PC ================= -->
+            <form action="#">
+                <span style="font-size: 1.1rem;">Sıralama: </span>
+                <select name="" id="">
+                    <option value="">Ada görə</option>
+                    <option value="">Yenilər əvvəlcə</option>
+                    <option value="">Populyar məhsullar əvvəlcə</option>
+                    <option value="">Populyar məhsullar sonda</option>
+                    <option value="">Əvvəlcə ucuz</option>
+                    <option value="">Əvvəlcə baha</option>
+                </select>
+            </form>
+            
+
+
+            
+
+        </div>
+    </section>
+    <!-- !============== Sehifeler ================== -->
+    <div class="page">
+        <button id="prev"> < Əvvəlki</button>
+        <button class="page-btn active" data-page="1">1</button>
+        <button class="page-btn" data-page="2">2</button>
+        <button class="page-btn" data-page="3">3</button>
+        <button id="next">Sonrakı > </button>
+    </div>
+    
+     <!-- !============== Footer ================== -->
+     <footer>
+        <div class="footer-container">
+
+            <!-- * ============== logo ve sosial sebekeler ===========-->
+            <div class="footer-logo">
+                <a href="#" style="outline: none; border: none;">Lankon<span>Farm</span></a>
+
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <!-- * ============== kecidler 1================= -->
+            <div class="footer-links">
+                <strong>Kateqoriyalar</strong>
+                <ul>
+                    <li><a href="#">Süd məhsulları</a></li>
+                    <li><a href="#">Meyvələr</a></li>
+                    <li><a href="#">Tərəvəzlər</a></li>
+                    <li><a href="#">Digər məhsullar</a></li>
+                </ul>
+            </div>
+            <!-- * ============== kecidler 2================= -->
+            <div class="footer-links">
+                <strong>Şirkət</strong>
+                <ul>
+                    <li><a href="https://lankonfarm.com/about-us.html">Haqqımızda</a></li>
+                    <li><a href="#">Partnyorlar</a></li>
+                    <li><a href="#">SDY-xidməti</a></li>
+                </ul>
+            </div>
+            <!-- * ============== kecidler 3================= -->
+            <div class="footer-links">
+                <strong>Əlaqə</strong>
+                <ul>
+                    <li><a href="#">Telefon: (+994) 055-888-99-88</a></li>
+                    <li><a href="#">Ünvan: Lənkəran</a></li>
+                    <li><a href="#">Email: LankonFarm@gmail.com</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+     </footer>
+     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+     <script>
+        AOS.init();
+      </script>
+     <script src="javascript/index.js"></script>
+</body>
+
+</html>

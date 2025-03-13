@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-button {
+            width: auto;
+            height: 170px;
+            background-size: cover;
+            margin: 0 auto;
+            display: block;
+        }
+        .horizontal-scroll {
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex; /* Initially hidden */
+        }
+        .horizontal-scroll img {
+            width: 160px;
+            height: 160px;
+            margin-right: 10px;
+        }
+        input, select, button {
+            width: calc(100% - 32px);
+            margin: 16px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .file-upload {
+            display: block;
+            justify-content: center;
+            justify-items: center;
+            text-align: center;
+            background-color: #218838;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .file-upload:hover {
+            background-color: #1e7e34;
+        }
+        input[type="file"] {
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div style="height: 270px;"></div>
+        <div class="image-button" id="selectedimg">
+            <div class="horizontal-scroll" id="horizontalscrol">
+                
+        
+            </div>
+        </div>
+        <div style="height: 20px;"></div>
+        
+
+        <label for="fileInput" class="file-upload">Şəkil Yükle</label>
+        <input type="file" id="fileInput" multiple accept="image/*">
+        <div style="height: 20px;"></div>
+        
+        <label for="fileInputvd" class="file-upload">Video Yükle</label>
+        <input type="file" id="fileInputvd" accept="video/*">
+   
+        
+        <script>
+            window.onload = function() {
+                const imageInput = document.getElementById('fileInput');
+                const videoInput = document.getElementById('fileInputvd');
+                const horizontalScroll = document.getElementById('horizontalscrol');
+        
+                imageInput.addEventListener('change', function() {
+                    Array.from(this.files).forEach(file => {
+                        const fileURL = URL.createObjectURL(file);
+                        const img = document.createElement('img');
+                        img.width = 170;
+                        img.height = 170;
+                        img.src = fileURL;
+                        img.alt = file.name;
+                        horizontalScroll.appendChild(img);
+                    });
+                });
+        
+                videoInput.addEventListener('change', function() {
+                    Array.from(this.files).forEach(file => {
+                        const fileURL = URL.createObjectURL(file);
+                        const video = document.createElement('video');
+                        video.controls = true;
+                        video.width = 170;
+                        video.height = 170;
+        
+                        const source = document.createElement('source');
+                        source.src = fileURL;
+                        source.type = file.type;
+        
+                        video.appendChild(source);
+                        horizontalScroll.appendChild(video);
+                    });
+                });
+            }
+        </script>
+        
+
+
+        <div style="height: 20px;"></div>
+        <input type="text" id="productnames" placeholder="Məhsulun adı">
+        <input type="text" id="fermerid" placeholder="Fermer ID yazın">
+        <input type="number" id="productseller" placeholder="Məhsulun qiyməti">
+        <input type="number" id="productselleruptodown" placeholder="Məhsulun endirimli qiyməti">
+        <input type="number" id="prductunit" placeholder="Məhsulun cekisi">
+        
+        <select id="seherler">
+            <option value="">Şəhəri Seçin</option>
+            <option value="Bütün Şəhərlər">Bütün Şəhərlər</option>
+            <option value="Bakı">Bakı</option>
+            <option value="Gəncə">Gəncə</option>
+            <option value="Sumqayıt">Sumqayıt</option>
+            <option value="Şəki">Şəki</option>
+            <option value="Mingəçevir">Mingəçevir</option>
+            <option value="Naftalan">Naftalan</option>
+            <option value="Lənkəran">Lənkəran</option>
+            <option value="Şirvan">Şirvan</option>
+            <option value="Yevlax">Yevlax</option>
+            <option value="Xankəndi">Xankəndi</option>
+            <option value="Naxçıvan">Naxçıvan</option>
+            <option value="Abşeron">Abşeron</option>
+            <option value="Ağcabədi">Ağcabədi</option>
+            <option value="Ağdam">Ağdam</option>
+            <option value="Ağdaş">Ağdaş</option>
+            <option value="Ağstafa">Ağstafa</option>
+            <option value="Ağsu">Ağsu</option>
+            <option value="Astara">Astara</option>
+            <option value="Babək">Babək</option>
+            <option value="Balakən">Balakən</option>
+            <option value="Bərdə">Bərdə</option>
+            <option value="Beyləqan">Beyləqan</option>
+            <option value="Biləsuvar">Biləsuvar</option>
+            <option value="Cəbrayıl">Cəbrayıl</option>
+            <option value="Cəlilabad">Cəlilabad</option>
+            <option value="Daşkəsən">Daşkəsən</option>
+            <option value="Füzuli">Füzuli</option>
+            <option value="Gədəbəy">Gədəbəy</option>
+            <option value="Goranboy">Goranboy</option>
+            <option value="Göyçay">Göyçay</option>
+            <option value="Göygöl">Göygöl</option>
+            <option value="Hacıqabul">Hacıqabul</option>
+            <option value="Xaçmaz">Xaçmaz</option>
+            <option value="Xızı">Xızı</option>
+            <option value="Xocalı">Xocalı</option>
+            <option value="Xocavənd">Xocavənd</option>
+            <option value="İmişli">İmişli</option>
+            <option value="İsmayıllı">İsmayıllı</option>
+            <option value="Kəlbəcər">Kəlbəcər</option>
+            <option value="Kəngərli">Kəngərli</option>
+            <option value="Kürdəmir">Kürdəmir</option>
+            <option value="Qəbələ">Qəbələ</option>
+            <option value="Qax">Qax</option>
+            <option value="Qazax">Qazax</option>
+            <option value="Qobustan">Qobustan</option>
+            <option value="Quba">Quba</option>
+            <option value="Qubadlı">Qubadlı</option>
+            <option value="Qusar">Qusar</option>
+            <option value="Laçın">Laçın</option>
+            <option value="Lerik">Lerik</option>
+            <option value="Masallı">Masallı</option>
+            <option value="Neftçala">Neftçala</option>
+            <option value="Oğuz">Oğuz</option>
+            <option value="Ordubad">Ordubad</option>
+            <option value="Saatlı">Saatlı</option>
+            <option value="Sabirabad">Sabirabad</option>
+            <option value="Sədərək">Sədərək</option>
+            <option value="Salyan">Salyan</option>
+            <option value="Samux">Samux</option>
+            <option value="Siyəzən">Siyəzən</option>
+            <option value="Şabran">Şabran</option>
+            <option value="Şamaxı">Şamaxı</option>
+            <option value="Şəmkir">Şəmkir</option>
+            <option value="Şuşa">Şuşa</option>
+            <option value="Tərtər">Tərtər</option>
+            <option value="Tovuz">Tovuz</option>
+            <option value="Ucar">Ucar</option>
+            <option value="Yardımlı">Yardımlı</option>
+            <option value="Yevlax">Yevlax</option>
+            <option value="Zağatala">Zağatala</option>
+            <option value="Zəngilan">Zəngilan</option>
+            <option value="Zərdab">Zərdab</option>
+        </select>
+
+        <select id="productkategoriya">
+            <option value="">Kategoriya Seçin</option>
+            <option value="Süd Məhsulları">Süd Məhsulları</option>
+            <option value="Meyvələr">Meyvələr</option>
+            <option value="Tərəvəzlər">Tərəvəzlər</option>
+            <option value="Ət Məhsulları">Ət Məhsulları</option>
+            <option value="Gilə Meyvələr">Gilə Meyvələr</option>
+            <option value="İçkilər">İçkilər</option>
+            <option value="Pambıq">Pambıq</option>
+            <option value="İpək">İpək</option>
+            <option value="Arıçılıq">Arıçılıq</option>
+            <option value="Çərəzlər">Çərəzlər</option>
+        </select>
+
+        <select id="productaltkategoriya">
+            <option value="">Alt Kategoriya Seçin</option>
+        </select>
+
+        <div style="display: flex; justify-content: space-between;">
+            <button id="gonder">Gönder</button>
+            <button id="goster">Şəkli seçin</button>
+        </div>
+    </div>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
+    <script type="module" src="javascript/upload.js"></script>
+</body>
+</html>

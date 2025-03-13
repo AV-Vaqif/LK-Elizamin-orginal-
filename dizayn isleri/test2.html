@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İnteraktif Bekleme Ekranı</title>
+  <style>
+  
+  .loading-screen {
+    text-align: center;
+  }
+  
+  .loading-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+  }
+  
+  .circle {
+  width: 100%;
+  height: 100%;
+  border: 6px solid rgba(255, 255, 255, 0.1);
+  border-top: 6px solid #59ff00; /* Neon yeşil */
+  border-right: 6px solid #00ff37; /* Neon mavi */
+  border-radius: 50%;
+  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; /* Yavaş ve esnek dönüş */
+  box-shadow: 0 0 15px #59ff00, 0 0 25px #9bff3e;
+}
+
+/* Parlama efekti */
+.circle:before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top: 3px solid rgba(255, 255, 255, 0.5);
+  animation: spin 3s linear infinite;
+}
+  
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Nabız animasyonu */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+}
+  
+  .progress-container {
+    width: 300px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    margin: 20px auto;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #fff;
+    border-radius: 5px 0 0 5px;
+    transition: width 0.2s ease-in-out;
+  }
+  
+  #loading-text {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  </style>
+</head>
+<body>
+  <form id="payment-form">
+    <label for="cardNumber">Kart Nömrəsi:</label>
+    <input type="text" id="cardNumber" required />
+
+    <label for="expiryDate">Son İstifadə Tarixi (MM/YY):</label>
+    <input type="text" id="expiryDate" required />
+
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" required />
+
+    <button type="submit">Ödə</button>
+</form>
+
+<script>
+document.getElementById("payment-form").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const cardData = {
+        cardNumber: document.getElementById("cardNumber").value,
+        expiryDate: document.getElementById("expiryDate").value,
+        cvv: document.getElementById("cvv").value,
+    };
+
+    const response = await fetch("/process-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cardData),
+    });
+
+    const result = await response.json();
+    alert(result.message);
+});
+</script>
+
+</body>
+</html>

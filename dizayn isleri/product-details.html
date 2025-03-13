@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--! ========== FONT AWESOME =====================  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/product-details.css">
+    <title>product details</title>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            margin: 2% auto;
+        }
+
+        .card-preview {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            transition: transform 0.5s ease-in-out;
+            transform-style: preserve-3d; /* 3D fırlanma üçün */
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+
+        #card-logo {
+            width: 100px;
+            object-fit: contain;
+
+        }
+
+        .card-number {
+            font-size: 18px;
+            letter-spacing: 2px;
+            margin-top: 15px;
+        }
+
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .cancel-btn {
+            background-color: #f44336;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        #confirmButton {
+            background-color: green;
+            color: white;
+        }
+
+        #cancelButton {
+            background-color: red;
+            color: white;
+        }
+
+        .signup-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            height: 28px;
+            width: 60px;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s;
+        }
+
+        .signup-button:hover {
+            background-color: #45a049;
+            /* Darker green */
+        }
+
+        .signup-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: transform 0.5s;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 0;
+        }
+
+        .signup-button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .signup-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        .custom-checkbox {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border: 2px solid #4eb060;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .custom-checkbox:after {
+            content: '';
+            position: absolute;
+            width: 19px;
+            height: 19px;
+            background-color: #4eb060;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 2s;
+            border-radius: 3px;
+        }
+
+        input[type="checkbox"]:checked+.custom-checkbox:after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        input[type="checkbox"]:checked+.custom-checkbox {
+            background-color: #e7f3ff;
+        }
+
+        label {
+            margin-left: 10px;
+            font-size: 16px;
+        }
+
+    
+
+        
+    </style>
+</head>
+
+<body>
+    <!--! ========== NAV BAR =====================  -->
+    <nav class="navigation">
+
+        <a href="#" class="logo" style="outline: none; border: none;">Lankon<span>Farm</span></a>
+
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon">
+            <span class="nav-icon"></span>
+        </label>
+
+
+        <ul class="menu">
+            <li><a href="index.html">Ana səhifə</a></li>
+            <li><a href="product.html">Məhsullar</a></li>
+            <li><a href="#">Partnyorlar</a></li>
+            <li><a href="#">SDY-xidməti</a></li>
+        </ul>
+
+        <div class="right-nav">
+            <a href="beyenilen.html" class="like"><i class="fa-regular fa-heart"></i><span>0</span></a>
+            <a href="sebet.html" class="cart"><i class="fa-solid fa-cart-shopping"></i><span>0</span></a>
+            <a id="alinks" class="profile">
+                <div id="profile-icon" class="profile-container">
+                    <i class="fa-regular fa-circle-user"></i>
+                </div>
+            </a>
+        </div>
+    </nav>
+    <!--! ========== NAV BAR bitdi =====================  -->
+
+    <h1 class="flex-box-title">Məhsula baxış</h1>
+    <div class="flex-box">
+        <div class="left">
+            <div class="big-img">
+                <img id="img1" src="">
+            </div>
+            <div class="images">
+                <div class="small-img">
+                    <img id="img2" src="" onclick="showImg(this.src)">
+                </div>
+                <div class="small-img">
+                    <img id="img3" src="" onclick="showImg(this.src)">
+                </div>
+                <div class="small-img">
+                    <img id="img4" src="" onclick="showImg(this.src)">
+                </div>
+                <div class="small-img">
+                    <video id="videosu" src="" controls></video>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Kart Girişi Modal -->
+        <div id="paymentModal" class="modal">
+            <div class="modal-content">
+                <h3>Kart Məlumatlarını Daxil Edin</h3>
+                <div class="card-preview" id="card-dz">
+                    <img id="card-logo" src="/none.png" alt="">
+                    <h4>Kart Məlumatları</h4>
+                    <p class="card-number">**** **** **** ****</p>
+                    <div class="card-details">
+                        <span class="card-name">Ad Soyad</span>
+                        <span class="card-expiry">MM/YY</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Kart Nömrəsi</label>
+                    <input type="text" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+                </div>
+
+                <div class="input-group">
+                    <label>Ad Soyad</label>
+                    <input type="text" id="cardName" placeholder="Ad Soyad">
+                </div>
+
+                <div class="input-group">
+                    <label>Son İstifadə Tarixi (MM/YY)</label>
+                    <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                </div>
+
+                <div class="input-group">
+                    <label>CVC</label>
+                    <input type="text" id="cvc" placeholder="XXX" maxlength="3" onclick="cvcClick">
+                </div>
+
+                <button id="payButton">Ödənişi təsdiqlə</button>
+                <div style="height: 10px;"></div>
+                <button id="closeModal" class="cancel-btn">Bağla</button>
+            </div>
+        </div>
+
+
+        <div class="right">
+            <div id="pname" class="pname"></div>
+            <div id="price" class="price"></div>
+            <div id="city" class="price"></div>
+            <div id="rating" class="ratings"></div>
+            <div id="salesperson" class="salesperson"></div>
+            <div class="size">
+                <p id="unit">Çəki :</p>
+
+            </div>
+            <div class="quantity">
+                <p>Özəl çəki :</p>
+                <input id="cekisi" style="width: 60px;" type="number" value="1" min="1"> /kq
+            </div>
+            <div class="size">
+                <h3>Ödəmə Üsulu</h3>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="creative-checkbox" class="odenis" value="kartla">
+                    <label for="creative-checkbox" class="custom-checkbox"></label>
+                    <label for="creative-checkbox">kartla</label>
+
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="checkbox" class="odenis" value="Yerində Ödəniş">
+                    <label for="checkbox" class="custom-checkbox"></label>
+                    <label for="checkbox">Yerində Ödəniş</label>
+                </div>
+
+            </div>
+            <div class="btn-box">
+                <button id="cart" class="cart-btn"><i class="fa-solid fa-cart-shopping"></i> Səbətə əlavə et</button>
+                <button id="buy" class="buy-btn"><i class="fas fa-shopping-bag"></i> Sifariş et</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let bigImg = document.querySelector('.big-img img');
+        function showImg(pic) {
+            bigImg.src = pic;
+        }
+    </script>
+
+
+    <script>
+        
+        document.getElementById("cardNumber").addEventListener("input", function () {
+            let cardNumber = this.value.replace(/\D/g, ""); // Yalnız rəqəmləri saxla
+            cardNumber = cardNumber.replace(/(.{4})/g, "$1 ").trim(); // Hər 4 rəqəmdən sonra boşluq əlavə et
+
+            this.value = cardNumber; // Input dəyərini yenilə
+
+            let logo = document.getElementById("card-logo");
+
+            if (cardNumber.startsWith("4")) {
+                logo.src = "/visa.png"; // Visa loqosu
+            } else if (/^5[1-5]/.test(cardNumber) || /^222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720/.test(cardNumber)) {
+                logo.src = "/master.png"; // MasterCard loqosu
+            } else if (/^3[47]/.test(cardNumber)) {
+                logo.src = "/american-exps.png"; // American Express loqosu
+            } else if (/^6(?:011|4[4-9]|5)/.test(cardNumber)) {
+                logo.src = "/discover.png"; // Discover loqosu
+            } else if (/^3(?:0[0-5]|[68])/.test(cardNumber)) {
+                logo.src = "/DCI.png"; // Diners Club loqosu
+            } else if (/^35(2[89]|[3-8][0-9])/.test(cardNumber)) {
+                logo.src = "/JCB.png"; // JCB loqosu
+            } else if (/^62/.test(cardNumber)) {
+                logo.src = "/UnionPay.png"; // UnionPay loqosu
+            } else if (/^(50|56|57|58|63|67)/.test(cardNumber)) {
+                logo.src = "/maestro.png"; // Maestro loqosu
+            } else {
+                logo.src = "/none.png"; // Uyğun kart tapılmadıqda loqonu sil
+               
+            }
+        });
+
+        let cvcClick = document.querySelector("#cvc");
+
+        cvcClick.addEventListener('click', ()=> {
+            let divv = document.getElementById("card-dz");
+            divv.style.transform = "rotateY(180deg)";
+        })
+
+    </script>
+    <script>
+        const cardNumberInput = document.getElementById("cardNumber");
+        const cardNameInput = document.getElementById("cardName");
+        const expiryDateInput = document.getElementById("expiryDate");
+        const openModalBtn = document.getElementById("buy");
+        const closeModalBtn = document.getElementById("closeModal");
+        const paymentModal = document.getElementById("paymentModal");
+
+        cardNumberInput.addEventListener("input", function () {
+            let value = this.value.replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
+            this.value = value;
+            document.querySelector(".card-number").textContent = value || "**** **** **** ****";
+        });
+
+        cardNameInput.addEventListener("input", function () {
+            document.querySelector(".card-name").textContent = this.value || "Ad Soyad";
+        });
+
+        expiryDateInput.addEventListener("input", function () {
+            let value = this.value.replace(/\D/g, "").slice(0, 4);
+            if (value.length > 2) value = value.slice(0, 2) + "/" + value.slice(2);
+            this.value = value;
+            document.querySelector(".card-expiry").textContent = value || "MM/YY";
+        });
+
+        openModalBtn.addEventListener("click", function () {
+            paymentModal.style.display = "block";
+        });
+
+        closeModalBtn.addEventListener("click", function () {
+            paymentModal.style.display = "none";
+        });
+
+        window.onclick = function (event) {
+            if (event.target == paymentModal) {
+                paymentModal.style.display = "none";
+            }
+        };
+
+        document.getElementById("payButton").addEventListener("click", function () {
+            alert("Ödəniş uğurla tamamlandı!");
+            paymentModal.style.display = "none";
+        });
+    </script>
+    <!-- !============== Footer ================== -->
+    <footer>
+        <div class="footer-container">
+
+            <!-- * ============== logo ve sosial sebekeler ===========-->
+            <div class="footer-logo">
+                <a href="#" style="outline: none; border: none;">Lankon<span>Farm</span></a>
+
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <!-- * ============== kecidler 1================= -->
+            <div class="footer-links">
+                <strong>Kateqoriyalar</strong>
+                <ul>
+                    <li><a href="#">Süd məhsulları</a></li>
+                    <li><a href="#">Meyvələr</a></li>
+                    <li><a href="#">Tərəvəzlər</a></li>
+                    <li><a href="#">Digər məhsullar</a></li>
+                </ul>
+            </div>
+            <!-- * ============== kecidler 2================= -->
+            <div class="footer-links">
+                <strong>Şirkət</strong>
+                <ul>
+                    <li><a href="https://lankonfarm.com/about-us.html">Haqqımızda</a></li>
+                    <li><a href="#">Partnyorlar</a></li>
+                    <li><a href="#">SDY-xidməti</a></li>
+                </ul>
+            </div>
+            <!-- * ============== kecidler 3================= -->
+            <div class="footer-links">
+                <strong>Əlaqə</strong>
+                <ul>
+                    <li><a href="#">Telefon: (+994) 055-888-99-88</a></li>
+                    <li><a href="#">Ünvan: Lənkəran</a></li>
+                    <li><a href="#">Email: LankonFarm@gmail.com</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </footer>
+
+    <script src="javascript/index.js"></script>
+    <script type="module" src="javascript/productdetalis.js"></script>
+</body>
+
+</html>

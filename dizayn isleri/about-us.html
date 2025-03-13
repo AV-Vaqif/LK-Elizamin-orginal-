@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--! ========== FONT AWESOME =====================  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="css/about-us.css">
+  <link rel="stylesheet" href="css/output.css">
+  <title>Haqqımızda</title>
+  <style>
+    header {
+      background: #2980b9;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    h2 {
+      color: #2980b9;
+    }
+
+    .container {
+      width: 80%;
+      margin: 10px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .uls {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .lis {
+      background: #e7f1ff;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .lis:hover {
+      background: #d1e7ff;
+    }
+
+    button {
+      background: #2980b9;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #1a5276;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--! ========== NAV BAR =====================  -->
+  <nav class="navigation">
+
+    <a href="#" class="logo" style="outline: none; border: none;">Lankon<span>Farm</span></a>
+
+    <input type="checkbox" class="menu-btn" id="menu-btn">
+    <label for="menu-btn" class="menu-icon">
+      <span class="nav-icon"></span>
+    </label>
+
+
+    <ul class="menu">
+      <li><a href="index.html">Ana səhifə</a></li>
+      <li><a href="product.html">Məhsullar</a></li>
+      <li><a href="#">Partnyorlar</a></li>
+      <li><a href="#">SDY-xidməti</a></li>
+    </ul>
+
+    <div class="right-nav">
+      <a href="#" class="like"><i class="fa-regular fa-heart"></i><span>0</span></a>
+      <a href="#" class="cart"><i class="fa-solid fa-cart-shopping"></i><span>0</span></a>
+      <a href="#" class="profile"><i class="fa-regular fa-circle-user"></i></a>
+    </div>
+  </nav>
+  <!--! ========== NAV BAR bitdi =====================  -->
+
+  <div class="bg-white py-24 sm:py-32">
+    <div class=" mx-auto grid max-w-7xl gap-20 px-6 lg:px-8 xl:grid-cols-3">
+      <div class="max-w-xl">
+        <h2 class="text-pretty text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Bizim komanda</h2>
+        <p class="mt-6 text-lg/8 text-gray-600">Lankon Farm, təbii kənd təsərrüfatı məhsullarını online satış və
+          çatdırılma vasitəsilə müştərilərə təqdim edir.</p>
+      </div>
+      <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
+        <li>
+          <div class="flex items-center gap-x-6">
+            <img class="size-16 rounded-full" src="images/Profile-sz.png" alt="">
+            <div>
+              <h3 class="text-base/7 font-semibold tracking-tight text-gray-900">Suzanna Əlizadə</h3>
+              <p class="text-sm/6 font-semibold text-[#4eb060]">Layihə Meneceri</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center gap-x-6">
+            <img class="size-16 rounded-full" src="images/Profile-av.jpg" alt="">
+            <div>
+              <h3 class="text-base/7 font-semibold tracking-tight text-gray-900">Vaqif Nəsirli</h3>
+              <p class="text-sm/6 font-semibold text-[#4eb060]">Front-end Developer</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center gap-x-6">
+            <img class="size-16 rounded-full" src="images/Profile-cv.png" alt="">
+            <div>
+              <h3 class="text-base/7 font-semibold tracking-tight text-gray-900">Cavidan Vəlizadə</h3>
+              <p class="text-sm/6 font-semibold text-[#4eb060]">Front-end Developer</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center gap-x-6">
+            <img class="size-16 rounded-full" src="images/Profile-elz.jpg" alt="">
+            <div>
+              <h3 class="text-base/7 font-semibold tracking-tight text-gray-900">Əlizamin Əliyev</h3>
+              <p class="text-sm/6 font-semibold text-[#4eb060]">Back-end Developer / Mobile App</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center gap-x-6">
+            <img class="size-16 rounded-full" src="images/Profile-rsl.jpg" alt="">
+            <div>
+              <h3 class="text-base/7 font-semibold tracking-tight text-gray-900">Rəsul Möhsümov</h3>
+              <p class="text-sm/6 font-semibold text-[#4eb060]">Sosial Media Meneceri</p>
+            </div>
+          </div>
+        </li>
+
+
+        <!-- More people... -->
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <p>
+      Lankon Farm şirkəti, təbii kənd təsərrüfatı məhsullarını müştərilərimizə topdan və pərakəndə formada, online satış
+      və çatdırılma xidmətləri vasitəsilə təmin etmək üçün yaradılmış güclü bir təşkilatdır. Vizyonumuz, fermerləri
+      müştərilərlə birbaşa əlaqələndirmək və hər kəsin təbii, təmiz qidaları rahat bir şəkildə əldə etməsinə imkan
+      yaratmaqdır. Rəsmi veb saytımız olan <a href="http://www.lankonfarm.com" target="_blank">www.lankonfarm.com</a>
+      vasitəsilə müştərilərimizə 7/24 xidmət göstəririk.
+    </p>
+
+    <h2>Komandamız</h2>
+    <p>
+      Lankon Farmın gülüncü ən böyük üstünlüklərindən biri, peşəkar, işinə sadiq və yaradıcı komandamızdır. Hər biri öz
+      sahəsində ixtisaslaşmış mütəxəssislərə malikik:
+    </p>
+    <ul id="teamList">
+      <li><strong>2 Frontend Developer:</strong> Veb saytın və mobil tətbiqlərin istifadəçi dostu və estetik baxımdan
+        cəlbedici olması üçün daim yeniliklər tətbiq edən güclü təcrübəyə malik proqramçılar.</li>
+      <li><strong>1 Backend və Mobil Tətbiq Developer:</strong> Sistemimizin möhkəmliyi və etibarlılığını təmin edən,
+        eyni zamanda mobil tətbiqlərə texniki dəstək göstərən bir ixtisasçı.</li>
+      <li><strong>Sosial Media Meneceri:</strong> Lankon Farmı sosial mediada ən son trendlərə uyğun tanıdırmaq,
+        müştərilərimizlə çevik əlaqə saxlamaq və şirkətin reputasiyasını qoruq saxlamaq üçün səyi.</li>
+      <li><strong>Layihə Meneceri:</strong> Komandamızı koordinasiya etmək, prosesləri izləmək və vaxtında nəticələr
+        əldə etməyi təmin edən lider.</li>
+    </ul>
+    <button onclick="showMore()">Daha Çox Məlumat Göstər</button>
+    <p id="moreInfo" style="display:none;">
+      Hər birimiz tək bir məqsəd ətrafında birləşmişik: müştərilərimizə təbii kənd təsərrüfatı məhsullarını ən
+      keyfiyyətli şəkildə çatdırmaq və bu sahədə qlobal lider olmaq.
+    </p>
+  </div>
+
+
+  <script>
+    function showMore() {
+      var moreInfo = document.getElementById("moreInfo");
+      if (moreInfo.style.display === "none") {
+        moreInfo.style.display = "block";
+      } else {
+        moreInfo.style.display = "none";
+      }
+    }
+  </script>
+  <!-- !============== Footer ================== -->
+  <footer>
+    <div class="footer-container">
+
+      <!-- * ============== logo ve sosial sebekeler ===========-->
+      <div class="footer-logo">
+        <a href="#" style="outline: none; border: none;">Lankon<span>Farm</span></a>
+
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <!-- * ============== kecidler 1================= -->
+      <div class="footer-links">
+        <strong>Kateqoriyalar</strong>
+        <ul>
+          <li><a href="#">Süd məhsulları</a></li>
+          <li><a href="#">Meyvələr</a></li>
+          <li><a href="#">Tərəvəzlər</a></li>
+          <li><a href="#">Digər məhsullar</a></li>
+        </ul>
+      </div>
+      <!-- * ============== kecidler 2================= -->
+      <div class="footer-links">
+        <strong>Şirkət</strong>
+        <ul>
+          <li><a href="#">Haqqımızda</a></li>
+          <li><a href="#">Partnyorlar</a></li>
+          <li><a href="#">SDY-xidməti</a></li>
+        </ul>
+      </div>
+      <!-- * ============== kecidler 3================= -->
+      <div class="footer-links">
+        <strong>Əlaqə</strong>
+        <ul>
+          <li><a href="#">Telefon: (+994) 055-888-99-88</a></li>
+          <li><a href="#">Ünvan: Lənkəran</a></li>
+          <li><a href="#">Email: LankonFarm@gmail.com</a></li>
+        </ul>
+      </div>
+
+
+    </div>
+  </footer>
+  <script src="javascript/index.js"></script>
+</body>
+
+</html>

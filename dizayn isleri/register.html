@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/register.css" />
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <title>Qeydiyyat</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/11.1.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/11.1.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/11.1.0/firebase-performance-compat.js"></script>
+ 
+    <style>
+
+    </style>
+
+<!-- Compiled and minified JavaScript -->
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  </head>
+  <body>
+    <div class="container">
+      
+        <div class="forms-container">
+        
+        <div class="signin-signup">
+            <!-- ! Sign-in -->
+          <form action="#" class="sign-in-form">
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input id="emails" type="text" data-i18n="Email" placeholder="Email" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input id="password" type="password" data-i18n="Şifrə" placeholder="Şifrə" />
+            </div>
+            
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input id="phones" type="phone" data-i18n="Fin Kodunuzı Daxil Edin" placeholder="Fin Kodunuzı Daxil Edin" />
+            </div>
+            <input id="loginbtns" type="submit" value="Daxil ol" class="btn solid" style="padding: 10px 0px 10px ; font-size: 12px; text-transform: none;" data-i18n="Daxil olun" />
+            <button type="button" style="display: none;" class="login-with-google-btn" id="google-sign-in" data-i18n="Google ilə daxil olun">
+              Google ilə daxil olun
+            </button>
+
+          </form>
+
+         
+            <!-- ! Sign-up -->
+          <form action="#" class="sign-up-form" style="margin-bottom: 40px;">
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input id="emailsup" type="email" data-i18n="Email"  placeholder="Email" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input id="namesup" type="text" data-i18n="Ad və Soyad" placeholder="Ad və Soyad" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-database"></i>
+              <input id="fincodesup" type="text" data-i18n="Fin Kod" placeholder="Fin Kod" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input id="passwordsup" type="password" data-i18n="Şifrə" placeholder="Şifrə" />
+            </div>
+            <div class="input-field" style="display: none;">
+              <i class="fas fa-lock"></i>
+              <input  id="passwordsups" type="password" data-i18n="Şifrə Təkrar" placeholder="Şifrə Təkrar" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-phone"></i>
+              <input id="phonesup" type="phone" data-i18n="Nömrənizi Daxil Edin" placeholder="Nömrənizi Daxil Edin" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-location"></i>
+              <button  id="adress" type="button" style="cursor: pointer;border: none;height: 38px;text-align: center;margin: auto; font-size: 18px;" data-i18n="Yaşadığınız ünvanın lokasiyası">Yaşadığınız ünvanın lokasiyası</button>
+            </div>
+            <select id="olkeler">
+              <option value="" data-i18n="Ölkəni Seçin">Ölkəni Seçin</option>
+                  <option value="Azərbaycan" data-i18n="Azərbaycan">Azərbaycan</option>
+                  <option value="Türkiyə" data-i18n="Türkiyə">Türkiyə</option>
+                  <option value="Qazaxıstan" data-i18n="Qazaxıstan">Qazaxıstan</option>
+                  <option value="Özbəkistan" data-i18n="Özbəkistan">Özbəkistan</option>
+                  <option value="Türkmənistan" data-i18n="Türkmənistan">Türkmənistan</option>
+                  <option value="Qırğızıstan" data-i18n="Qırğızıstan">Qırğızıstan</option>
+                  <option value="Tacikistan" data-i18n="Tacikistan">Tacikistan</option>
+                  <option value="Türkmənistan" data-i18n="Türkmənistan">Türkmənistan</option>
+                  <option value="Azerbaycan" data-i18n="Azərbaycan">Azərbaycan</option>
+                  <option value="Rusiya" data-i18n="Rusiya">Rusiya</option>
+                  <option value="Amerika Birləşmiş Ştatları" data-i18n="Amerika Birləşmiş Ştatları">Amerika Birləşmiş Ştatları</option>
+                  <option value="Fransa" data-i18n="Fransa">Fransa</option>
+                  <option value="Almaniya" data-i18n="Almaniya">Almaniya</option>
+                  <option value="İngiltərə" data-i18n="İngiltərə">İngiltərə</option>
+                  <option value="İtaliya" data-i18n="İtaliya">İtaliya</option>
+                  <option value="İspaniya" data-i18n="İspaniya">İspaniya</option>
+                  <option value="Yaponiya" data-i18n="Yaponiya">Yaponiya</option>
+                  <option value="Çin" data-i18n="Çin">Çin</option>
+                  <option value="Hindistan" data-i18n="Hindistan">Hindistan</option>
+                  <option value="Braziliya" data-i18n="Braziliya">Braziliya</option>
+                  <option value="Avstraliya" data-i18n="Avstraliya">Avstraliya</option>
+                  <option value="Kanada" data-i18n="Kanada">Kanada</option>
+                  <option value="Meksika" data-i18n="Meksika">Meksika</option>
+                  <option value="Cənubi Koreya" data-i18n="Cənubi Koreya">Cənubi Koreya</option>
+                  <option value="Səudiyyə Ərəbistanı" data-i18n="Səudiyyə Ərəbistanı">Səudiyyə Ərəbistanı</option>
+                  <option value="İsveçrə" data-i18n="İsveçrə">İsveçrə</option>
+                  <option value="Niderlandlar" data-i18n="Niderlandlar">Niderlandlar</option>
+                  <option value="Belçika" data-i18n="Belçika">Belçika</option>
+                  <option value="İsveç" data-i18n="İsveç">İsveç</option>
+                  <option value="Polşa" data-i18n="Polşa">Polşa</option>
+                  <option value="Norveç" data-i18n="Norveç">Norveç</option>
+                  <option value="Finlandiya" data-i18n="Finlandiya">Finlandiya</option>
+                  <option value="Danmarka" data-i18n="Danmarka">Danmarka</option>
+
+            </select>
+            <select id="seherler">
+              
+            </select>
+          
+          
+            <input id="signupbtns" type="submit" class="btn" value="Qeydiyyatdan Keçin" style="padding: 10px 0px 10px ; font-size: 12px; text-transform: none;" />
+            <button type="button" style="display: none;" class="login-with-google-btn"  id="google-sign-in" data-i18n="Google ilə daxil olun">
+              Google ilə daxil olun
+            </button>
+            
+          </form>
+
+        </div>
+
+      </div>
+
+      <script>
+
+          window.onload = function() {
+            var sign_up_btn = document.getElementById("sign-up-btn");
+            var sign_in_btn = document.getElementById("sign-in-btn");
+            var container = document.querySelector(".container");
+                sign_up_btn.addEventListener("click", () => {
+                        container.classList.add("sign-up-mode");
+                });
+
+                sign_in_btn.addEventListener("click", () => {
+                        container.classList.remove("sign-up-mode"); 
+                });
+                
+          }
+      </script>
+
+      <div class="panels-container">
+
+        <!-- ! Left panel-->
+        <div class="panel left-panel">
+          <div class="content">
+            <h1 class="image" style="width: 300px; color: #637E40; background-color: white; border-radius: 10px; bottom: 20px; position: relative;">Lankon <span style="color: #E2BF14;">Farm</span></h1>
+            <h3>Hesabınız yoxdur ?</h3>
+            <div style="height: 8px;"></div>
+            <button class="btn transparent" id="sign-up-btn" data-i18n="Qeydiyyatdan">
+              Qeydiyyatdan
+            </button>
+          </div>
+         
+        </div>
+
+        <!-- ! Right panel -->
+        <div class="panel right-panel">
+          <div class="content">
+            <h1 class="image" style="width: 300px; color: #637E40; background-color: white; border-radius: 10px; bottom: 20px; position: relative;">Lankon <span style="color: #E2BF14;">Farm</span></h1>
+            <h3 data-i18n="Hesabınız var ?">Hesabınız var ?</h3>
+            <div style="height: 8px;"></div>
+            <button class="btn transparent" id="sign-in-btn" data-i18n="Daxil olun">
+              Daxil olun
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+      
+    </div>
+
+    <script type="module" src="javascript/register.js"></script>
+  </body>
+</html>
